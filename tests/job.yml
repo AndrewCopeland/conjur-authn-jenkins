@@ -3,11 +3,11 @@
 - !policy
   id: team1
   body:
-  - !host testJob
+  - !host freestyle-jit-secret
   - !variable secret
   
   - !permit
-    role: !host testJob
+    role: !host freestyle-jit-secret
     resources:
     - !variable secret
     privilege: [ read, execute ]
@@ -15,4 +15,4 @@
 # This is giving the jenkinsJob the ability to authenticate as a jenkins job
 - !grant
   role: !group conjur/authn-jenkins/prod/clients
-  member: !host team1/testJob
+  member: !host team1/freestyle-jit-secret
