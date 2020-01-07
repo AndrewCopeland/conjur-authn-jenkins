@@ -1,0 +1,18 @@
+# This is creating a policy for 'team1' that has 1 jenkins job of 'testJob'
+# This jenkins job will have access to the 'team1/secret' secret.
+- !policy
+  id: team1
+  body:
+  - !host testJob
+  - !variable secret
+  
+  - !permit
+    role: !host testJob
+    resources:
+    - !variable secret
+    privilege: [ read, execute ]
+
+# This is giving the jenkinsJob the ability to authenticate as a jenkins job
+- !grant
+  role: !group conjur/authn-jenkins/prod/clients
+  member: !host team1/testJob
