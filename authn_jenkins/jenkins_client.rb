@@ -7,7 +7,7 @@ module Authentication
         @username = username
         @password = password
         @public_key = public_key
-        if allow_http != 'true' && !@url.starts_with? 'https'
+        if allow_http != 'true' && !@url.starts_with('https')
           raise Err::InvalidURL, @url
         end
       end
