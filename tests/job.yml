@@ -1,18 +1,29 @@
 # This is creating a policy for 'team1' that has 1 jenkins job of 'testJob'
-# This jenkins job will have access to the 'team1/secret' secret.
+# This jenkins jobs will have access to the 'team1/secret' secret.
 - !policy
   id: team1
   body:
-  - !host freestyle-jit-secret
-  - !variable secret
-  
-  - !permit
-    role: !host freestyle-jit-secret
-    resources:
+  - !group jit-jobs
+
+  - &hosts
+    - !host freestyle-jit-secret
+    - !host freestyle-jit-secret-username
+    - !host freestyle-jit-secret-ssh-key
+
+  - &secrets
     - !variable secret
+
+  - !grant
+    role: !group jit-jobs
+    member: *hosts
+
+  - !permit
+    role: !group jit-jobs
+    resource: *secrets
     privilege: [ read, execute ]
 
-# This is giving the jenkinsJob the ability to authenticate as a jenkins job
+
+# This is giving the jit-jobs ability to use authn-jenkins
 - !grant
   role: !group conjur/authn-jenkins/prod/clients
-  member: !host team1/freestyle-jit-secret
+  member: !group team1/jit-jobs
