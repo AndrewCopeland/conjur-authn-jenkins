@@ -2,6 +2,8 @@
   id: conjur/authn-jenkins/prod
   body:
   - !webservice
+    annotations:
+      allow-http: true
   - !group clients
   
   # these will be used to connect to the jenkins server and see if a specific job is running
