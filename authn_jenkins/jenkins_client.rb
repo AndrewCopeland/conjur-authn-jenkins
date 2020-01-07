@@ -23,10 +23,10 @@ module Authentication
       private
       def create_public_key()
         public_key = @public_key
-        if !public_key.starts_with('-----BEGIN PUBLIC KEY-----') && !public_key.ends_with('-----END PUBLIC KEY-----')
+        if !public_key.starts_with?('-----BEGIN PUBLIC KEY-----') && !public_key.ends_with?('-----END PUBLIC KEY-----')
           public_key = [
             "-----BEGIN PUBLIC KEY-----",
-            identity,
+            @public_key,
             "-----END PUBLIC KEY-----"
             ].join("\n")
         end
