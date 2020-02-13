@@ -1,6 +1,6 @@
 # conjur-authn-jenkins
 
-Volume mount the authenticator to the conjur instance
+How to add the `authn-jenkins` authenticator to your conjur instance.
 
 ## Dockerfile Example
 ```bash
